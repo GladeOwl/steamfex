@@ -1,0 +1,29 @@
+#!/usr/bin/expect -f
+
+spawn FEXRootFSFetcher
+expect {
+    "Response {y,yes,1} or {n,no,0}" { 
+        send "1\r"
+    }
+}
+expect {
+    "Response {y,yes,1} or {n,no,0}" { 
+        send "1\r"
+    }
+}
+expect {
+    "Response {y,yes,1} or {n,no,0}" { 
+        send "1\r"
+    }
+}
+expect {
+    "Response {1-2} or 0 to cancel" { 
+        send "2\r"
+    }
+}
+expect {
+    "Response {y,yes,1} or {n,no,0}" { 
+        send "1\r"
+    }
+} 
+expect eof
