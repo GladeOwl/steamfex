@@ -34,7 +34,7 @@ git clone https://github.com/GladeOwl/steamfex.git
 
 2. Build the image.
 ```bash
-sudo docker compose build .
+sudo docker compose build
 ```
 > ⚠️ **Note:** This can take a while.
 
@@ -44,11 +44,3 @@ sudo docker compose up -d
 ```
 
 ---
-
-## Adapting to a specific game. 
-
-> You can edit the steamcmd.sh command in the ``entrypoint.sh`` to install the specific game server.
-```bash
-# example for a Valheim server
-FEXBash "/home/steam/Steam/steamcmd.sh +force_install_dir ~/Steam/valheim +login anonymous +app_update 896660 validate +quit"
-```
