@@ -57,11 +57,6 @@ RUN sudo ninja install
 
 FROM fexinstall AS fexrootfs
 
-COPY expect.exp /tmp/expect.exp
-RUN sudo chmod +x /tmp/expect.exp
-
-FROM fexrootfs AS steam
-
 USER root
 
 RUN useradd -m -s /bin/bash steam
@@ -69,11 +64,15 @@ RUN echo "steam ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER steam
 
+WORKDIR /home/steam/.fex-emu/RootFS
+RUN sudo wget https://rootfs.fex-emu.gg/Ubuntu_24_04/2025-03-04/Ubuntu_24_04.sqsh
+
+WORKDIR /home/steam/.fex-emu
+RUN echo '{"Config":{"RootFS":"Ubuntu_24_04.sqsh"}}' > Config.json
+
+FROM fexrootfs AS steam
+
 WORKDIR /home/steam/Steam
 
 RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
-
-COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN sudo chmod +x /usr/local/bin/entrypoint.sh
-
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT FEXBash ./steamcmd.sh

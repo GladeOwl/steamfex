@@ -1,8 +1,8 @@
 services:
   fex:
     build: .
-    image: gladeowl/steam_fex
-    container_name: steam_fex
+    image: gladeowl/steam_fex_test
+    container_name: steam_fex_test
     cap_add:
       - SYS_ADMIN
     devices:
@@ -11,8 +11,6 @@ services:
       - apparmor:unconfined
     # networks:
       # - proxy   # SHARED CADDY NETWORK
-    volumes:
-      - ./saves/:/home/steam/saves
     stdin_open: true
     tty: true
 
