@@ -1,25 +1,22 @@
 services:
   fex:
     build: .
-    image: steam_fex
+    image: gladeowl/steam_fex
     container_name: steam_fex
-    ports:
-      - 2456:2456/udp
-      - 2457:2457/udp
-      - 2458:2458/udp
     cap_add:
       - SYS_ADMIN
     devices:
       - /dev/fuse
     security_opt:
       - apparmor:unconfined
-    networks:
-      - proxy   # shared external network with Caddy
+    # networks:
+      # - proxy   # SHARED CADDY NETWORK
     volumes:
       - ./saves/:/home/steam/saves
     stdin_open: true
     tty: true
 
-networks:
-  proxy:
-    external: true
+# OPTIONAL SSL FOR EXTERNAL CADDY CONTAINER
+# networks:
+#   proxy:
+#     external: true
