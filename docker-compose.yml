@@ -1,8 +1,8 @@
 services:
   fex:
     build: .
-    image: gladeowl/steam_fex_test
-    container_name: steam_fex_test
+    image: gladeowl/steam_fex
+    container_name: steam_fex
     cap_add:
       - SYS_ADMIN
     devices:
